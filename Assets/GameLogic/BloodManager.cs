@@ -9,6 +9,7 @@ public class BloodManager : MonoBehaviour
 {
     public TextMeshProUGUI text;
     public SKSlider bloodSlider;
+    public SKSlider bloodSlider_Bridge;
 
     public int bloodCount;
     public float bloodCountToDecimal;
@@ -133,6 +134,7 @@ public class BloodManager : MonoBehaviour
         // Calculate the decimal percentage of bloodCount relative to maxBlood
         float bloodPercentage = (float)bloodCount / maxBlood;
         bloodSlider.SetValue(bloodPercentage);
+        bloodSlider_Bridge.SetValue(bloodPercentage);
     }
 
 }
