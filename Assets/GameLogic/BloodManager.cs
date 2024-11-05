@@ -16,16 +16,39 @@ public class BloodManager : MonoBehaviour
     public int maxBlood;
 
     //Incremental Calculation
-    public int addBloodCount = 100;
+    public int addBloodCount = 10;
+    public int HeadCount = 0;
+    public float eachKillCount;
     public bool isAutoUpgraded = false;
-    public float timeBetweenClick = 5f;
-    private float time = 0f;
+    //public float timeBetweenClick = 5f;
+    //private float time = 0f;
 
 
 
     //Upgrades References
-    public GameObject UpgradeA1;
-    public GameObject UpgradeA1_1;
+
+    //Type A Puppet Master
+
+    //Upgrade Auto Pump
+    [Header("Auto Pump Upgrade GameObjects")]
+    public GameObject AutoPumpLevel1;
+    public GameObject AutoPumpLevel2;
+    public GameObject AutoPumpLevel3;
+    public GameObject AutoPumpMax;
+
+    [Header("Auto Pump Upgrade Costs")]
+    public int AutoPumpLevel1_Cost;
+    public int AutoPumpLevel2_Cost;
+    public int AutoPumpLevel3_Cost;
+    private bool isAutoPump1 = false;
+    private bool isAutoPump2 = false;
+    private bool isAutoPump3 = false;
+    public float timeBetweenPump = 3f;
+    private float time = 0f;
+
+
+
+
 
     public GameObject UpgradeA2;
 
@@ -53,10 +76,10 @@ public class BloodManager : MonoBehaviour
 
 
         //Auto Click upgrade Module
-        if(isAutoUpgraded)
+        if(isAutoPump1)
         {
             time += Time.deltaTime;
-            if(time >= timeBetweenClick)
+            if(time >= timeBetweenPump)
             {
                 AddBlood();
                 time = 0f;
@@ -71,9 +94,10 @@ public class BloodManager : MonoBehaviour
 
     public void AddBlood()
     {
-        bloodCount += addBloodCount;
+        bloodCount += (int)(addBloodCount * eachKillCount);
     }
 
+    /*
     public void AddBloodCountUpgrade()
     {
         if(bloodCount >= 5000)
@@ -94,6 +118,46 @@ public class BloodManager : MonoBehaviour
             UpgradeA1_1.SetActive(false);
         }
     }
+    */
+
+    #region Puppet Master Upgrades
+
+    //Auto Pump Upgrades
+    public void AutoPumpUpgradeLevel1()
+    {
+        if (bloodCount >= AutoPumpLevel1_Cost)
+        {
+            bloodCount -= AutoPumpLevel1_Cost;
+            isAutoPump1 = true;
+            AutoPumpLevel1.SetActive(false);
+            AutoPumpLevel2.SetActive(true);
+        }
+    }
+
+    public void AutoPumpUpgradeLevel2()
+    {
+        if (bloodCount >= AutoPumpLevel2_Cost)
+        {
+            bloodCount -= AutoPumpLevel2_Cost;
+            isAutoPump2 = true;
+            timeBetweenPump = 2f;
+            AutoPumpLevel2.SetActive(false);
+            AutoPumpLevel3.SetActive(true);
+        }
+    }
+
+    public void AutoPumpUpgradeLevel3()
+    {
+        if (bloodCount >= AutoPumpLevel3_Cost)
+        {
+            bloodCount -= AutoPumpLevel3_Cost;
+            isAutoPump3 = true;
+            timeBetweenPump = 1f;
+            AutoPumpLevel3.SetActive(false);
+            AutoPumpMax.SetActive(true);
+        }
+    }
+    #endregion
 
     public void AutoClickUpgrade()
     {
@@ -111,7 +175,7 @@ public class BloodManager : MonoBehaviour
         if (bloodCount >= 3000)
         {
             bloodCount -= 3000;
-            timeBetweenClick = 2f;
+            //timeBetweenClick = 2f;
             UpgradeB1_2.SetActive(false);
         }
     }
