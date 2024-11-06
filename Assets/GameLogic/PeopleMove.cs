@@ -8,6 +8,9 @@ public class PeopleMove : MonoBehaviour
     public float speed = 5f;
     public float DestoryXPosition;
 
+    public GameObject Visuals;
+    public Animator myAnimator;
+
     private BloodManager bloodManager;
     // Start is called before the first frame update
     void Start()
@@ -48,9 +51,18 @@ public class PeopleMove : MonoBehaviour
 
     private void OnMouseDown()
     {
+        myAnimator.SetBool("isDead", true);
+
+        // Destroy the game object when clicked
+        //Destroy(gameObject);
+        Invoke("killPeople", 0.35f);
+    }
+
+    public void killPeople()
+    {
         bloodManager.eachKillCount = speed * 1f;
         bloodManager.AddBlood();
-        // Destroy the game object when clicked
         Destroy(gameObject);
     }
+
 }
