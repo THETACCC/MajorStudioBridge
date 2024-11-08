@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PeopleSpawnerMaster : MonoBehaviour
+public class TaxiSpawnerMaster : MonoBehaviour
 {
     //SpawnerRef
     public GameObject peopleSpawnLeft;
     public GameObject peopleSpawnRight;
-    private PeopleSpawnerLeft peopleSpawnL;
-    private PeopleSpawnerRight peopleSpawnR;
+    private TaxiSpawnLeft peopleSpawnL;
+    private TaxiSpawnRight peopleSpawnR;
 
     public float timeBetweenSpawn = 0.35f;
     private float time = 0f;
@@ -16,8 +16,8 @@ public class PeopleSpawnerMaster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        peopleSpawnL = peopleSpawnLeft.GetComponent<PeopleSpawnerLeft>();
-        peopleSpawnR = peopleSpawnRight.GetComponent<PeopleSpawnerRight>();
+        peopleSpawnL = peopleSpawnLeft.GetComponent<TaxiSpawnLeft>();
+        peopleSpawnR = peopleSpawnRight.GetComponent<TaxiSpawnRight>();
 
     }
 
@@ -30,7 +30,7 @@ public class PeopleSpawnerMaster : MonoBehaviour
             Debug.Log("Spawn");
             int Spawning = Random.Range(0, 2);
             Debug.Log(Spawning);
-            if (Spawning == 0) 
+            if (Spawning == 0)
             {
                 peopleSpawnL.SpawnPeople();
 

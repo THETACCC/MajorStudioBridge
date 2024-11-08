@@ -11,6 +11,12 @@ public class PeopleMove : MonoBehaviour
     public GameObject Visuals;
     public Animator myAnimator;
 
+    public GameObject VisualsRegular;
+    public Animator myRegularAnimator;
+
+    public GameObject VisualsSlow;
+    public Animator mySlowAnimator;
+
     private BloodManager bloodManager;
     // Start is called before the first frame update
     void Start()
@@ -19,6 +25,25 @@ public class PeopleMove : MonoBehaviour
         if (BloodMaster != null )
         {
             bloodManager = BloodMaster.GetComponent<BloodManager>();
+        }
+
+        if(speed > 1f && speed <= 3f)
+        {
+            Visuals.SetActive(false);
+            VisualsRegular.SetActive(true);
+            VisualsSlow.SetActive(false);
+        }
+        else if (speed > 3f)
+        {
+            Visuals.SetActive(true);
+            VisualsRegular.SetActive(false);
+            VisualsSlow.SetActive(false);
+        }
+        else
+        {
+            Visuals.SetActive(false);
+            VisualsRegular.SetActive(false);
+            VisualsSlow.SetActive(true);
         }
     }
 
@@ -39,7 +64,9 @@ public class PeopleMove : MonoBehaviour
         else
         {
             transform.Translate(Vector3.left * speed * Time.deltaTime);
-
+            Visuals.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            VisualsRegular.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            VisualsSlow.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
             // Check if the object's position is less than the defined X position to destroy it
             if (transform.position.x <= DestoryXPosition)
             {
@@ -49,13 +76,24 @@ public class PeopleMove : MonoBehaviour
 
     }
 
+    public void autoKill()
+    {
+        myAnimator.SetBool("isDead", true);
+        myRegularAnimator.SetBool("isDead", true);
+        mySlowAnimator.SetBool("isDead", true);
+        // Destroy the game object when clicked
+        //Destroy(gameObject);
+        Invoke("killPeople", 0.3f);
+    }
+
     private void OnMouseDown()
     {
         myAnimator.SetBool("isDead", true);
-
+        myRegularAnimator.SetBool("isDead", true);
+        mySlowAnimator.SetBool("isDead", true);
         // Destroy the game object when clicked
         //Destroy(gameObject);
-        Invoke("killPeople", 0.35f);
+        Invoke("killPeople", 0.3f);
     }
 
     public void killPeople()

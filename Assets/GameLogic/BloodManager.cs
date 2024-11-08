@@ -8,6 +8,7 @@ using SKCell;
 public class BloodManager : MonoBehaviour
 {
     public TextMeshProUGUI text;
+    public TextMeshProUGUI headtext;
     public SKSlider bloodSlider;
     public SKSlider bloodSlider_Bridge;
 
@@ -26,6 +27,8 @@ public class BloodManager : MonoBehaviour
 
 
     //Upgrades References
+
+
 
     //Type A Puppet Master
 
@@ -47,8 +50,21 @@ public class BloodManager : MonoBehaviour
     private float time = 0f;
 
 
+    //Type B Blood Craft
+    [Header("Tentacle Upgrade GameObjects")]
+    public GameObject TentacleLevel1;
+    public GameObject TentacleLevel2;
+    public GameObject TentacleLevelMax;
 
-
+    [Header("Tentacle Upgrade Costs")]
+    public int TentacleLevel1_Cost;
+    public int TentacleLevel2_Cost;
+    [HideInInspector]
+    public bool isTentacle1 = false;
+    [HideInInspector]
+    public bool isTentacle2 = false;
+    [HideInInspector]
+    public bool isTentacleMax = false;
 
     public GameObject UpgradeA2;
 
@@ -58,7 +74,7 @@ public class BloodManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        maxBlood = 10000;
+        //maxBlood = 9999999999;
         bloodCount = 0;
 
     }
@@ -67,11 +83,12 @@ public class BloodManager : MonoBehaviour
     void Update()
     {
         // Ensure bloodCount is clamped between 0 and maxBlood
-        bloodCount = Mathf.Min(bloodCount, maxBlood);
+        //bloodCount = Mathf.Min(bloodCount, maxBlood);
         bloodCount = Mathf.Max(bloodCount, 0);
 
 
         text.text = bloodCount.ToString();
+        headtext.text = HeadCount.ToString();
         UpdateBloodSlider();
 
 
@@ -81,7 +98,7 @@ public class BloodManager : MonoBehaviour
             time += Time.deltaTime;
             if(time >= timeBetweenPump)
             {
-                AddBlood();
+                RandomAutoKill();
                 time = 0f;
             }
 
@@ -94,9 +111,20 @@ public class BloodManager : MonoBehaviour
 
     public void AddBlood()
     {
+        HeadCount++;
+        bloodCount += (int)(addBloodCount * eachKillCount);
+    }
+    public void AddBloodTaxi()
+    {
+        HeadCount+= 5;
         bloodCount += (int)(addBloodCount * eachKillCount);
     }
 
+    public void AddBloodTrain()
+    {
+        HeadCount += 20;
+        bloodCount += (int)(addBloodCount * eachKillCount);
+    }
     /*
     public void AddBloodCountUpgrade()
     {
@@ -123,6 +151,24 @@ public class BloodManager : MonoBehaviour
     #region Puppet Master Upgrades
 
     //Auto Pump Upgrades
+    private void RandomAutoKill()
+    {
+        GameObject[] peopleObjects = GameObject.FindGameObjectsWithTag("People");
+
+        if (peopleObjects.Length > 0)
+        {
+            int randomIndex = Random.Range(0, peopleObjects.Length);
+            GameObject selectedPerson = peopleObjects[randomIndex];
+
+            // Check if the selected person has a component with autoKill method
+            var personScript = selectedPerson.GetComponent<PeopleMove>(); // Replace PeopleScript with the actual script name that has autoKill
+            if (personScript != null)
+            {
+                personScript.autoKill(); // Call the autoKill function on the randomly selected person
+            }
+        }
+    }
+
     public void AutoPumpUpgradeLevel1()
     {
         if (bloodCount >= AutoPumpLevel1_Cost)
@@ -159,6 +205,33 @@ public class BloodManager : MonoBehaviour
     }
     #endregion
 
+
+    #region Blood Craft
+
+    //Tentacle Upgrades
+    public void TentacleUpgradeLevel1()
+    {
+        if (bloodCount >= TentacleLevel1_Cost)
+        {
+            bloodCount -= TentacleLevel1_Cost;
+            isTentacle1 = true;
+            TentacleLevel1.SetActive(false);
+            TentacleLevel2.SetActive(true);
+        }
+    }
+
+    public void TentacleUpgradeLevel2()
+    {
+        if (bloodCount >= TentacleLevel2_Cost)
+        {
+            bloodCount -= TentacleLevel2_Cost;
+            isTentacle2 = true;
+            TentacleLevel2.SetActive(false);
+            TentacleLevelMax.SetActive(true);
+        }
+    }
+
+    #endregion
     public void AutoClickUpgrade()
     {
         if(bloodCount >= 2000)

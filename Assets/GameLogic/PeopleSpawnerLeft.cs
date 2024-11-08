@@ -27,7 +27,7 @@ public class PeopleSpawnerLeft : MonoBehaviour
         {
             peopleMove.speed = Random.Range(.5f, 5f);
             peopleMove.isLeft= true;
-            peopleMove.DestoryXPosition = 12f;
+            peopleMove.DestoryXPosition = 16f;
         }
     }
 }
