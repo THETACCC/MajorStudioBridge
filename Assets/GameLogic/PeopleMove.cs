@@ -18,6 +18,9 @@ public class PeopleMove : MonoBehaviour
     public Animator mySlowAnimator;
 
     private BloodManager bloodManager;
+
+    public ParticleSystem deadVFX;
+    public GameObject DeadVFXOBJ;
     // Start is called before the first frame update
     void Start()
     {
@@ -74,10 +77,22 @@ public class PeopleMove : MonoBehaviour
             }
         }
 
+
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            killPeopleInstant();
+        }
+
     }
 
     public void autoKill()
     {
+
+            AudioManager.PlaySound(SoundType.Tentacles, 1);
+
+
+
+        deadVFX.Play();
         myAnimator.SetBool("isDead", true);
         myRegularAnimator.SetBool("isDead", true);
         mySlowAnimator.SetBool("isDead", true);
@@ -88,6 +103,10 @@ public class PeopleMove : MonoBehaviour
 
     private void OnMouseDown()
     {
+
+            AudioManager.PlaySound(SoundType.Tentacles, 1);
+
+        deadVFX.Play();
         myAnimator.SetBool("isDead", true);
         myRegularAnimator.SetBool("isDead", true);
         mySlowAnimator.SetBool("isDead", true);
@@ -98,9 +117,20 @@ public class PeopleMove : MonoBehaviour
 
     public void killPeople()
     {
+
+
         bloodManager.eachKillCount = speed * 1f;
         bloodManager.AddBlood();
         Destroy(gameObject);
     }
 
+
+    public void killPeopleInstant()
+    {
+        Instantiate(DeadVFXOBJ, gameObject.transform.position, Quaternion.identity);
+
+        bloodManager.eachKillCount = speed * 1f;
+        bloodManager.AddBlood();
+        Destroy(gameObject);
+    }
 }

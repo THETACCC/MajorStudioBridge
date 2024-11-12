@@ -31,6 +31,7 @@ public class TheEyeController : MonoBehaviour
     {
         if (myUpdateTab != null)
         {
+            AudioManager.PlaySound(SoundType.UIClick, 1);
             myUpdateTab.SetActive(true);
             myExitTab.SetActive(true);// Activates the GameObject on click
         }

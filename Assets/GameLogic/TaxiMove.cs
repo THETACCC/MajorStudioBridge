@@ -10,7 +10,8 @@ public class TaxiMove : MonoBehaviour
 
     public GameObject Visuals;
     public Animator myAnimator;
-
+    public ParticleSystem deadVFX;
+    public GameObject DeadVFXOBJ;
     private BloodManager bloodManager;
     // Start is called before the first frame update
     void Start()
@@ -54,6 +55,8 @@ public class TaxiMove : MonoBehaviour
     {
         if (bloodManager.isTentacle1 == true)
         {
+            //Instantiate(DeadVFXOBJ, gameObject.transform.position, Quaternion.identity);
+            AudioManager.PlaySound(SoundType.Tentacles, 1);
             myAnimator.SetBool("isDead", true);
             // Destroy the game object when clicked
             //Destroy(gameObject);
@@ -67,4 +70,15 @@ public class TaxiMove : MonoBehaviour
         bloodManager.AddBloodTaxi();
         Destroy(gameObject);
     }
+
+
+    public void killPeopleInstant()
+    {
+        //Instantiate(DeadVFXOBJ, gameObject.transform.position, Quaternion.identity);
+        bloodManager.eachKillCount = speed * 5f;
+        bloodManager.AddBloodTaxi();
+        Destroy(gameObject);
+    }
+
+
 }

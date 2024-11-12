@@ -26,7 +26,7 @@ public class RatSpawner : MonoBehaviour
             var personScript = peopleObject.GetComponent<PeopleMove>(); // Replace PeopleScript with the actual script name that has autoKill
             if (personScript != null)
             {
-                personScript.killPeople(); // Call the autoKill function on the randomly selected person
+                personScript.killPeopleInstant(); // Call the autoKill function on the randomly selected person
             }
         }
 

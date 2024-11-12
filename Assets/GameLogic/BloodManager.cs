@@ -28,8 +28,11 @@ public class BloodManager : MonoBehaviour
 
     //Upgrades References
 
-
-
+    [Header("Upgrade Time Line")]
+    public GameObject ManEaterBase;
+    public GameObject TentacleBase;
+    public GameObject SummonBase;
+    public GameObject MoreEaterBase;
     //Type A Puppet Master
 
     //Upgrade Auto Pump
@@ -179,6 +182,28 @@ public class BloodManager : MonoBehaviour
     public GameObject MorePeopleMax;
 
 
+    [Header("Prestige Cars")]
+
+
+    public GameObject MoreCarsLevel1;
+    public GameObject MoreCarsLevel2;
+    public GameObject MoreCarsLevel3;
+    public GameObject MoreCarsLevel4;
+    public GameObject MoreCarsLevel5;
+    public GameObject MoreCarsLevel6;
+    public GameObject MoreCarsMax;
+
+
+    [Header("Prestige Trains")]
+
+
+    public GameObject MoreTrainsLevel1;
+    public GameObject MoreTrainsLevel2;
+    public GameObject MoreTrainsLevel3;
+    public GameObject MoreTrainsLevel4;
+    public GameObject MoreTrainsLevel5;
+    public GameObject MoreTrainsLevel6;
+    public GameObject MoreTrainsMax;
 
     public GameObject UpgradeA2;
 
@@ -227,6 +252,7 @@ public class BloodManager : MonoBehaviour
             timeRat += Time.deltaTime;
             if (timeRat >= timeBetweenRat)
             {
+                AudioManager.PlaySound(SoundType.Swarm, 1);
                 //RandomAutoKill();
                 RatSpawning();
                 timeRat = 0f;
@@ -242,7 +268,7 @@ public class BloodManager : MonoBehaviour
             {
                 //RandomAutoKill();
 
-
+                AudioManager.PlaySound(SoundType.Swarm, 1);
                 CrowSpawning();
                 if(isSummon3)
                 {
@@ -311,6 +337,39 @@ public class BloodManager : MonoBehaviour
                 isPrestige6 = true;
             }
         }
+        if (HeadCount > Prestige7_Count)
+        {
+            if (!isPrestige7)
+            {
+                PrestigeBase.SetActive(true);
+                isPrestige7 = true;
+            }
+        }
+        if (HeadCount > Prestige8_Count)
+        {
+            if (!isPrestige8)
+            {
+                PrestigeBase.SetActive(true);
+                isPrestige8 = true;
+            }
+        }
+        if (HeadCount > Prestige9_Count)
+        {
+            if (!isPrestige9)
+            {
+                PrestigeBase.SetActive(true);
+                isPrestige9 = true;
+            }
+        }
+        if (HeadCount > Prestige10_Count)
+        {
+            if (!isPrestige10)
+            {
+                PrestigeBase.SetActive(true);
+                isPrestige10 = true;
+            }
+        }
+
 
     }
 
@@ -361,6 +420,13 @@ public class BloodManager : MonoBehaviour
             isAutoPump1 = true;
             AutoPumpLevel1.SetActive(false);
             AutoPumpLevel2.SetActive(true);
+            ManEaterBase.SetActive(true);
+            TentacleBase.SetActive(true);
+            AudioManager.PlaySound(SoundType.Unlock, 1);
+        }
+        else
+        {
+            AudioManager.PlaySound(SoundType.NotEnough, 1);
         }
     }
 
@@ -373,6 +439,11 @@ public class BloodManager : MonoBehaviour
             timeBetweenPump = 2f;
             AutoPumpLevel2.SetActive(false);
             AutoPumpLevel3.SetActive(true);
+            AudioManager.PlaySound(SoundType.Unlock, 1);
+        }
+        else
+        {
+            AudioManager.PlaySound(SoundType.NotEnough, 1);
         }
     }
 
@@ -385,6 +456,11 @@ public class BloodManager : MonoBehaviour
             timeBetweenPump = 1f;
             AutoPumpLevel3.SetActive(false);
             AutoPumpMax.SetActive(true);
+            AudioManager.PlaySound(SoundType.Unlock, 1);
+        }
+        else
+        {
+            AudioManager.PlaySound(SoundType.NotEnough, 1);
         }
     }
 
@@ -399,9 +475,14 @@ public class BloodManager : MonoBehaviour
             isManEater1 = true;
             ManEaterLevel1.SetActive(false);
             ManEaterLevel2.SetActive(true);
-
+            AudioManager.PlaySound(SoundType.Unlock, 1);
             ManEaterOBJ.SetActive(true);
-
+            MoreEaterBase.SetActive(true);
+            SummonBase.SetActive(true);
+        }
+        else
+        {
+            AudioManager.PlaySound(SoundType.NotEnough, 1);
         }
     }
 
@@ -413,12 +494,16 @@ public class BloodManager : MonoBehaviour
             isManEater2 = true;
             ManEaterLevel2.SetActive(false);
             ManEaterLevel3.SetActive(true);
-
+            AudioManager.PlaySound(SoundType.Unlock, 1);
             manEater.timeBetweenEat = 10f;
             manEater2.timeBetweenEat = 10f;
             manEater3.timeBetweenEat = 10f;
             manEater4.timeBetweenEat = 10f;
             manEater5.timeBetweenEat = 10f;
+        }
+        else
+        {
+            AudioManager.PlaySound(SoundType.NotEnough, 1);
         }
     }
     public void ManEaterUpgrade3()
@@ -429,13 +514,17 @@ public class BloodManager : MonoBehaviour
             isManEater3 = true;
             ManEaterLevel3.SetActive(false);
             ManEaterMax.SetActive(true);
-
+            AudioManager.PlaySound(SoundType.Unlock, 1);
             manEater.timeBetweenEat = 5f;
             manEater2.timeBetweenEat = 5f;
             manEater3.timeBetweenEat = 5f;
             manEater4.timeBetweenEat = 5f;
             manEater5.timeBetweenEat = 5f;
 
+        }
+        else
+        {
+            AudioManager.PlaySound(SoundType.NotEnough, 1);
         }
     }
     //Summoning stuff
@@ -489,9 +578,13 @@ public class BloodManager : MonoBehaviour
             isSummon1 = true;
             SummonLevel1.SetActive(false);
             SummonLevel2.SetActive(true);
-
+            AudioManager.PlaySound(SoundType.Unlock, 1);
             RatSpawnerOBJ.SetActive(true);
 
+        }
+        else
+        {
+            AudioManager.PlaySound(SoundType.NotEnough, 1);
         }
     }
 
@@ -503,8 +596,12 @@ public class BloodManager : MonoBehaviour
             isSummon2 = true;
             SummonLevel2.SetActive(false);
             SummonLevel3.SetActive(true);
+            AudioManager.PlaySound(SoundType.Unlock, 1);
 
-
+        }
+        else
+        {
+            AudioManager.PlaySound(SoundType.NotEnough, 1);
         }
     }
 
@@ -516,8 +613,12 @@ public class BloodManager : MonoBehaviour
             isSummon3 = true;
             SummonLevel3.SetActive(false);
             SummonMax.SetActive(true);
+            AudioManager.PlaySound(SoundType.Unlock, 1);
 
-
+        }
+        else
+        {
+            AudioManager.PlaySound(SoundType.NotEnough, 1);
         }
     }
     #endregion
@@ -534,6 +635,11 @@ public class BloodManager : MonoBehaviour
             isTentacle1 = true;
             TentacleLevel1.SetActive(false);
             TentacleLevel2.SetActive(true);
+            AudioManager.PlaySound(SoundType.Unlock, 1);
+        }
+        else
+        {
+            AudioManager.PlaySound(SoundType.NotEnough, 1);
         }
     }
 
@@ -545,6 +651,11 @@ public class BloodManager : MonoBehaviour
             isTentacle2 = true;
             TentacleLevel2.SetActive(false);
             TentacleLevelMax.SetActive(true);
+            AudioManager.PlaySound(SoundType.Unlock, 1);
+        }
+        else
+        {
+            AudioManager.PlaySound(SoundType.NotEnough, 1);
         }
     }
 
@@ -558,6 +669,11 @@ public class BloodManager : MonoBehaviour
             MoreEaterLevel1.SetActive(false);
             MoreEaterLevel2.SetActive(true);
             ManEaterOBJ2.SetActive(true);
+            AudioManager.PlaySound(SoundType.Unlock, 1);
+        }
+        else
+        {
+            AudioManager.PlaySound(SoundType.NotEnough, 1);
         }
     }
 
@@ -570,6 +686,11 @@ public class BloodManager : MonoBehaviour
             MoreEaterLevel2.SetActive(false);
             MoreEaterLevel3.SetActive(true);
             ManEaterOBJ3.SetActive(true);
+            AudioManager.PlaySound(SoundType.Unlock, 1);
+        }
+        else
+        {
+            AudioManager.PlaySound(SoundType.NotEnough, 1);
         }
     }
 
@@ -583,6 +704,11 @@ public class BloodManager : MonoBehaviour
             MoreEaterMax.SetActive(true);
             ManEaterOBJ4.SetActive(true);
             ManEaterOBJ5.SetActive(true);
+            AudioManager.PlaySound(SoundType.Unlock, 1);
+        }
+        else
+        {
+            AudioManager.PlaySound(SoundType.NotEnough, 1);
         }
     }
 
@@ -638,6 +764,102 @@ public class BloodManager : MonoBehaviour
         MorePeopleMax.SetActive(true);
         peopleMaster.timeBetweenSpawn -= 0.05f;
     }
+
+    //More Cars
+    public void MoreCarsUpgrade1()
+    {
+
+        MoreCarsLevel1.SetActive(false);
+        MoreCarsLevel2.SetActive(true);
+        taxiMaster.timeBetweenSpawn -= 0.2f;
+    }
+
+    public void MoreCarsUpgrade2()
+    {
+
+        MoreCarsLevel2.SetActive(false);
+        MoreCarsLevel3.SetActive(true);
+        taxiMaster.timeBetweenSpawn -= 0.2f;
+    }
+
+    public void MoreCarsUpgrade3()
+    {
+
+        MoreCarsLevel3.SetActive(false);
+        MoreCarsLevel4.SetActive(true);
+        taxiMaster.timeBetweenSpawn -= 0.2f;
+    }
+
+    public void MoreCarsUpgrade4()
+    {
+
+        MoreCarsLevel4.SetActive(false);
+        MoreCarsLevel5.SetActive(true);
+        taxiMaster.timeBetweenSpawn -= 0.2f;
+    }
+
+    public void MoreCarsUpgrade5()
+    {
+
+        MoreCarsLevel5.SetActive(false);
+        MoreCarsLevel6.SetActive(true);
+        taxiMaster.timeBetweenSpawn -= 0.2f;
+    }
+
+    public void MoreCarsUpgrade6()
+    {
+
+        MoreCarsLevel6.SetActive(false);
+        MoreCarsMax.SetActive(true);
+        taxiMaster.timeBetweenSpawn -= 0.2f;
+    }
+
+
+    public void MoreTrainsUpgrade1()
+    {
+
+        MoreTrainsLevel1.SetActive(false);
+        MoreTrainsLevel2.SetActive(true);
+        trainMaster.timeBetweenSpawn -= 0.5f;
+    }
+
+    public void MoreTrainsUpgrade2()
+    {
+
+        MoreTrainsLevel2.SetActive(false);
+        MoreTrainsLevel3.SetActive(true);
+        trainMaster.timeBetweenSpawn -= 0.5f;
+    }
+    public void MoreTrainsUpgrade3()
+    {
+
+        MoreTrainsLevel3.SetActive(false);
+        MoreTrainsLevel4.SetActive(true);
+        trainMaster.timeBetweenSpawn -= 0.5f;
+    }
+    public void MoreTrainsUpgrade4()
+    {
+
+        MoreTrainsLevel4.SetActive(false);
+        MoreTrainsLevel5.SetActive(true);
+        trainMaster.timeBetweenSpawn -= 0.5f;
+    }
+    public void MoreTrainsUpgrade5()
+    {
+
+        MoreTrainsLevel5.SetActive(false);
+        MoreTrainsLevel6.SetActive(true);
+        trainMaster.timeBetweenSpawn -= 0.5f;
+    }
+    public void MoreTrainsUpgrade6()
+    {
+
+        MoreTrainsLevel6.SetActive(false);
+        MoreTrainsMax.SetActive(true);
+        trainMaster.timeBetweenSpawn -= 0.5f;
+    }
+
+
     #endregion
     public void AutoClickUpgrade()
     {
@@ -648,6 +870,10 @@ public class BloodManager : MonoBehaviour
             UpgradeB1.SetActive(false);
             UpgradeB1_2.SetActive(true);
         }
+        else
+        {
+            AudioManager.PlaySound(SoundType.NotEnough, 1);
+        }
     }
 
     public void AutoClickUpgradeSpeedB1_2()
@@ -657,6 +883,10 @@ public class BloodManager : MonoBehaviour
             bloodCount -= 3000;
             //timeBetweenClick = 2f;
             UpgradeB1_2.SetActive(false);
+        }
+        else
+        {
+            AudioManager.PlaySound(SoundType.NotEnough, 1);
         }
     }
 
@@ -669,6 +899,10 @@ public class BloodManager : MonoBehaviour
             maxBlood = 20000;
             UpgradeA2.SetActive(false);
 
+        }
+        else
+        {
+            AudioManager.PlaySound(SoundType.NotEnough, 1);
         }
     }
 

@@ -61,7 +61,7 @@ public class ManEater : MonoBehaviour
                     if (people != null)
                     {
                         PeopleMove peopleMove = people.GetComponent<PeopleMove>();
-                        peopleMove.killPeople();
+                        peopleMove.killPeopleInstant();
                     }
 
                 }

@@ -26,7 +26,7 @@ public class CockSpawner : MonoBehaviour
             var personScript = peopleObject.GetComponent<PeopleMove>(); // Replace PeopleScript with the actual script name that has autoKill
             if (personScript != null)
             {
-                personScript.killPeople(); // Call the autoKill function on the randomly selected person
+                personScript.killPeopleInstant(); // Call the autoKill function on the randomly selected person
             }
         }
         GameObject[] TaxiObjects = GameObject.FindGameObjectsWithTag("Car");
@@ -35,7 +35,7 @@ public class CockSpawner : MonoBehaviour
             var Taxiscript = TaxiObject.GetComponent<TaxiMove>(); // Replace PeopleScript with the actual script name that has autoKill
             if (Taxiscript != null)
             {
-                Taxiscript.killPeople(); // Call the autoKill function on the randomly selected person
+                Taxiscript.killPeopleInstant(); // Call the autoKill function on the randomly selected person
             }
         }
 
@@ -45,7 +45,7 @@ public class CockSpawner : MonoBehaviour
             var TrainScript = TrainOject.GetComponent<TrainMove>(); // Replace PeopleScript with the actual script name that has autoKill
             if (TrainScript != null)
             {
-                TrainScript.killPeople(); // Call the autoKill function on the randomly selected person
+                TrainScript.killPeopleInstant(); // Call the autoKill function on the randomly selected person
             }
         }
 

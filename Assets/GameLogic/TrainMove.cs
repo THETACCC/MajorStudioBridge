@@ -10,7 +10,8 @@ public class TrainMove : MonoBehaviour
 
     public GameObject Visuals;
     public Animator myAnimator;
-
+    public ParticleSystem deadVFX;
+    public GameObject DeadVFXOBJ;
     private BloodManager bloodManager;
     // Start is called before the first frame update
     void Start()
@@ -53,6 +54,8 @@ public class TrainMove : MonoBehaviour
     {
         if(bloodManager.isTentacle2 ==true)
         {
+            //Instantiate(DeadVFXOBJ, gameObject.transform.position, Quaternion.identity);
+            AudioManager.PlaySound(SoundType.Tentacles, 1);
             myAnimator.SetBool("isDead", true);
             // Destroy the game object when clicked
             //Destroy(gameObject);
@@ -67,4 +70,14 @@ public class TrainMove : MonoBehaviour
         bloodManager.AddBloodTrain();
         Destroy(gameObject);
     }
+
+    public void killPeopleInstant()
+    {
+        //Instantiate(DeadVFXOBJ, gameObject.transform.position, Quaternion.identity);
+        bloodManager.eachKillCount = speed * 20f;
+        bloodManager.AddBloodTaxi();
+        Destroy(gameObject);
+    }
+
+
 }
